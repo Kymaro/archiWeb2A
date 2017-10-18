@@ -18,6 +18,13 @@
          de voyage à travers le {{ circuit.paysDepart }}, pour terminer à
          {{ circuit.villeArrivee }}.</p>
 
+        <h3> Programme</h3>
+            <ol>
+                {%  for etape in circuit.getEtapes() %}
+                    <li> {{ etape.getVilleEtape() }} pendant  {{ etape.getNombreJours() }} {% if etape.getNombreJours() ==1 %} jour {% else %} jours {% endif %} </li>
+                {% endfor %}
+            </ol>
+
   {% if circuit.programmations is not empty %}
   <h2>Programmations de ce circuit</h2>
   {# <pre>{{ dump(circuit) }}</pre> #}
