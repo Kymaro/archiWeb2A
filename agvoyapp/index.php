@@ -115,7 +115,27 @@ $app->get ( '/admin/circuit/{id}',
 )->bind ( 'admincircuitshow' );
 
 
+$app->get ( '/admin/identification',
+		function () use ($app)
+		{
+			
+			
+			return $app ['twig']->render ( 'back/ident.html.twig', [
+					
+			] );
+}
+)->bind ( 'adminprogrammationlist' );
 
+$app->get ( '/admin/ajout',
+		function () use ($app)
+		{
+		##### faire un menu admin 
+			
+			return $app ['twig']->render ( 'back/ajouter.html.twig', [
+					
+			] );
+}
+)->bind ( 'adminlol' );
 
 
 $app->run ();
