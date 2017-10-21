@@ -75,6 +75,19 @@ $app->get ( '/programmation',
 
 // ADMIN : BACK OFFICE
 
+$app->get ( '/admin',
+    function () use ($app)
+    {
+        $circuitslist = get_all_circuits ();
+        // print_r($circuitslist);
+
+        return $app ['twig']->render ( 'back/accueil.html.twig', [
+            'circuitslist' => $circuitslist
+        ] );
+    }
+)->bind ( 'adminaccueil' );
+
+
 $app->get ( '/admin/circuit', 
     function () use ($app) 
     {
@@ -124,7 +137,7 @@ $app->get ( '/admin/identification',
 					
 			] );
 }
-)->bind ( 'adminprogrammationlist' );
+)->bind ( 'adminidentification' );
 
 $app->get ( '/admin/ajout',
 		function () use ($app)
