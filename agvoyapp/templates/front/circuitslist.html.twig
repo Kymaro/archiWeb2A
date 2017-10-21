@@ -11,8 +11,8 @@
         <ul>
         {# Loop through list and creeate the list of circuit items. #}
         {% for circuit in circuitslist %}
-
-            {% if circuit.getProgrammations() is not empty %}
+            {% set programme = circuit.getProgrammations() %}
+            {% if programme is not empty %}
                 <li>
           		    <a href="{{ path('circuitshow', { 'id' : circuit.id }) }}">{{ circuit.description }}</a>
                 </li>

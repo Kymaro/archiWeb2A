@@ -1,22 +1,70 @@
 {# templates/baselayout.html.twig #}
 <!DOCTYPE HTML>
-<html>
+<html lang="fr">
   <head>
-    <meta charset="utf-8">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <title>{% block title %}Application todos{% endblock %}</title>
-    {% block head %}
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-        <script src="/js/bootstrap.min.js"></script>
-    {% endblock %}
   </head>
+
   <body>
-    {% block body %}
 
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-        <script src="/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <div class="jumbotron">
+      <div class="container text-center">
+          <h1>Online Store</h1>
+          <p>Mission, Vission & Values</p>
+      </div>
+  </div>
 
-    {% endblock %} {# body #}
+  {% block header %}
+      <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="/">TRAVEL'INT</a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                  <ul class="nav navbar-nav">
+                      <li class="active"><a href="/circuit">Nos Circuits</a></li>
+                      <li><a href="/programmation">Calendrier</a></li>
+                      <li><a href="/">Qui Sommes Nous ?</a></li>
+                      <li>    <label class="btn btn-default btn-file">
+                              Browse <input type="file" style="display: none;">
+                          </label></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a href="/admin/identification"><span class="glyphicon glyphicon-user"></span> Mon Compte</a></li>
+                      <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+  {% endblock %}
+  {% block body %}
+  {% endblock %}
+  {% block footer %}
+      <footer class="container-fluid text-center">
+          <form class="form-inline">Nos dernières offres en exclus:
+              <input type="email" class="form-control" size="50" placeholder="Email Address">
+              <button type="button" class="btn btn-danger">S'inscrire</button>
+          </form>
+      </footer>
+  {% endblock %}
+
+
+  <script src="/js/bootstrap.min.js"></script>
   </body>
 </html>
+
+
