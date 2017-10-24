@@ -25,6 +25,10 @@ $app->get('/admin', function () use ($app) {
     
 })->bind('admin_home');
 
+$app->get ( '/admin/identification', function () use ($app) {
+
+        return $app ['twig']->render ( 'backoffice/identification.html.twig');
+})->bind('adminident');
 // Below, we use the approach of binding closures to variable names to ease their 
 // spotting in the IDE. This may not be the best writing style, though. 
 

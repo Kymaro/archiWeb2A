@@ -326,7 +326,7 @@ function get_programmation_by_id($id)
 {
 	global $app;
 	
-	$programmation = null;
+	$programmation = null ;
 	
 	$returned_circuitids = $app['db']->fetchAll(
 	    "SELECT circuit_id FROM programmation_circuit WHERE id = :id", 

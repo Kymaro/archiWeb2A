@@ -13,9 +13,17 @@
         <ul>
         {# Loop through list and creeate the list of circuit items. #}
         {% for circuit in circuitslist %}
-            <li>
-          		<a href="{{ path('circuitshow', { 'id' : circuit.id }) }}">{{ circuit.description }}</a>
-            </li>
+            {% set programme = circuit.getProgrammations() %}
+            {% if programme is not empty %}
+                {% for programmation in programme %}
+                    {% if programmation.getDateDepart()|date("Y-m-d") > "now"|date("Y-m-d") %}
+                        <li>
+                            <a href="{{ path('circuitshow', { 'id' : circuit.id }) }}">{{ circuit.description }}</a>
+                        </li>
+
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
         {% endfor %}
         </ul>
     {% else %}

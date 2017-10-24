@@ -2,10 +2,13 @@
 
 {% extends "baselayout.html.twig" %}
 
+{% block brand %}
+    <a class="navbar-brand" href="/admin">TRAVEL'INT</a>
+{% endblock %}
 {% block menu %}
     <li><a href="{{ path('admin_circuitlist') }}">Administration Circuit</a> </li>
     <li><a href="#{# path('admin_programmationlist') #}">Administration Programmations</a></li>
-    <li><a href="{{ path('circuitlist') }}">Vue utilisateur</a></li>
+    <li><a href="{{ path('home') }}">Vue utilisateur</a></li>
 {% endblock %}
 
 {% block header %}
@@ -20,6 +23,3 @@
     {% endfor %}
 
 {% endblock %}{# menu #}
-
-{% block footer %}
-{% endblock %}
