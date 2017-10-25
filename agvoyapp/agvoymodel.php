@@ -36,7 +36,11 @@ function get_all_circuits()
     	$circuit->setVilleDepart($c['ville_depart']);
     	$circuit->setVilleArrivee($c['ville_arrivee']);
     	$circuit->setDureeCircuit($c['duree_circuit']);
-    	
+        $programmation_list=get_programmations_by_circuit_id($circuit->getId());
+
+        foreach ($programmation_list as $p){
+            $circuit->addProgrammation($p);
+        }
     	array_push($list_of_circuits, $circuit);
     }
      
@@ -324,31 +328,49 @@ function get_all_programmations()
  */
 function get_programmation_by_id($id)
 {
-	global $app;
-	
-	$programmation = null ;
-	
-	$returned_circuitids = $app['db']->fetchAll(
-	    "SELECT circuit_id FROM programmation_circuit WHERE id = :id", 
-		array(
-				'id' => $id
-		));
-	
-	// normally only one circuit_id
-	foreach($returned_circuitids as $c) {
-		$circuit = get_circuit_by_id($c['circuit_id']);
-		
-		foreach($circuit->getProgrammations() as $p) {
-			if($p->getId() == $id) {
-				$programmation = $p;
-				break;
-			}
-		}
-		break;
-	}
+    global $app;
 
-	return $programmation;
- }
+    $programmation = null;
+
+    $returned_circuitids = $app['db']->fetchAll(
+        "SELECT circuit_id FROM programmation_circuit WHERE id = :id",
+        array(
+            'id' => $id
+        ));
+
+    // normally only one circuit_id
+    foreach($returned_circuitids as $c) {
+        $circuit = get_circuit_by_id($c['circuit_id']);
+
+        foreach($circuit->getProgrammations() as $p) {
+            if($p->getId() == $id) {
+                $programmation = $p;
+                break;
+            }
+        }
+        break;
+    }
+    return $programmation;
+}
+
+/**
+ * Récupère les programmations d'un circuit d'identifiant de circuit donné
+ *
+ * @param int $id
+ * @return NULL|array
+ */
+function get_programmations_by_circuit_id($id)
+{
+    global $list_of_programmations;
+    global $app;
+    $found = array();
+    $list_of_programmations = $app['db']->fetchAll("SELECT * FROM programmation_circuit WHERE circuit_id==$id");
+    foreach ($list_of_programmations as $p) {
+        $programmation=new ProgrammationCircuit($p['date_depart'], $p['nombre_personnes'], $p['prix'],$p['circuit_id'], $p['id']);
+        $found[] = $programmation;
+    }
+    return $found;
+}
 
  /**
   * Add a programmation of a Circuit to the DB 

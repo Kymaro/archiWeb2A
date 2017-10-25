@@ -13,9 +13,11 @@
         <ul>
         {# Loop through list and creeate the list of programmation items. #}
         {% for programmation in programmationslist %}
-            <li>
-          		<a href=" {{ path('programmationshow', { 'id' : programmation.id }) }}">{{ programmation.circuit.description }} le {{ programmation.dateDepart|date('d-m-Y')  }}</a>
-           </li>
+            {% if programmation.getDateDepart()|date("Y-m-d") > "now"|date("Y-m-d") %}
+                <li>
+          		    <a href=" {{ path('programmationshow', { 'id' : programmation.id }) }}">{{ programmation.circuit.description }} le {{ programmation.dateDepart|date('d-m-Y')  }}</a>
+                </li>
+            {% endif %}
         {% endfor %}
         </ul>
     {% else %}
